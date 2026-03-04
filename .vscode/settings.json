@@ -1,0 +1,14 @@
+{
+    "dart.flutterSdkPath": "/Users/mynorchavarria/Desktop/Curso-Flutter/.fvm/versions/3.29.2",
+    "editor.formatOnSave": true,
+    "[dart]": {
+        "editor.defaultFormatter": "Dart-Code.dart-code",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+        "editor.rulers": [
+            100
+        ]
+    }
+}
