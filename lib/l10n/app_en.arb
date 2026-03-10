@@ -1,6 +1,6 @@
 {
     "@@locale": "en",
-    "appTitle": "Flutter Demo",
+    "appTitle": "Banca App",
     "balance": "Balance",
     "transactions": "Transactions",
     "welcome": "Welcome!",
@@ -17,6 +17,12 @@
     "settings": "Settings",
     "language": "Language",
     "english": "English",
-    "spanish": "Spanish"
+    "spanish": "Spanish",
+    "logout": "Log out",
+    "logoutConfirmDescription": "Are you sure you want to log out?",
+    "loggingIn": "Signing in...",
+    "loggingOut": "Signing out...",
+    "accept": "Accept",
+    "cancel": "Cancel"
     
 }

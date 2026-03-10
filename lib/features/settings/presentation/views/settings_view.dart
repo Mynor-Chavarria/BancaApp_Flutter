@@ -1,15 +1,30 @@
-import '../../../../app/presentation/controllers/locale_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/settings_provider.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return ChangeNotifierProvider<SettingsProvider>(
+      create: (_) => SettingsProvider(),
+      child: const _SettingsContent(),
+    );
+  }
+}
+
+class _SettingsContent extends StatelessWidget {
+  const _SettingsContent();
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final provider = Provider.of<SettingsProvider>(context);
     final currentLanguageCode =
-        appLocaleController.value?.languageCode ??
+        provider.currentLanguageCode ??
         Localizations.localeOf(context).languageCode;
 
     return Center(
@@ -42,20 +57,17 @@ class SettingsView extends StatelessWidget {
                     border: const OutlineInputBorder(),
                   ),
                   items: [
-                    DropdownMenuItem(
-                      value: 'en',
-                      child: Text(l10n.english),
-                    ),
-                    DropdownMenuItem(
-                      value: 'es',
-                      child: Text(l10n.spanish),
-                    ),
+                    DropdownMenuItem(value: 'en', child: Text(l10n.english)),
+                    DropdownMenuItem(value: 'es', child: Text(l10n.spanish)),
                   ],
                   onChanged: (value) {
                     if (value == null) {
                       return;
                     }
-                    appLocaleController.setLanguageCode(value);
+                    Provider.of<SettingsProvider>(
+                      context,
+                      listen: false,
+                    ).setLanguageCode(value);
                   },
                 ),
               ],

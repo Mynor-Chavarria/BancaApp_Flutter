@@ -1,6 +1,6 @@
 {
     "@@locale": "es",
-    "appTitle": "Demo Flutter",
+    "appTitle": "Banca App",
     "balance": "Saldo",
     "transactions": "Transacciones",
     "welcome": "¡Bienvenido!",
@@ -17,6 +17,12 @@
     "settings": "Configuración",
     "language": "Idioma",
     "english": "Inglés",
-    "spanish": "Español"
+    "spanish": "Español",
+    "logout": "Cerrar sesión",
+    "logoutConfirmDescription": "¿Estás seguro de que deseas cerrar sesión?",
+    "loggingIn": "Iniciando sesión...",
+    "loggingOut": "Cerrando sesión...",
+    "accept": "Aceptar",
+    "cancel": "Cancelar"
     
 }

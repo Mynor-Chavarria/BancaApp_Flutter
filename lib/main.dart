@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'app/presentation/controllers/locale_controller.dart';
 import 'core/environmet/env.dart';
+import 'core/theme/app_colors.dart';
+import 'core/widgets/global_loader_overlay.dart';
 import 'features/login/presentation/views/login_view.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   Env.environment = Environment.development;
@@ -31,13 +34,21 @@ class _MyAppState extends State<MyApp> {
       builder: (context, locale, _) {
         return MaterialApp(
           onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+          builder: (context, child) {
+            return GlobalLoaderOverlay(child: child ?? const SizedBox.shrink());
+          },
           theme: ThemeData(
             useMaterial3: true,
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            colorScheme: AppColors.lightColorScheme,
+            scaffoldBackgroundColor: AppColors.background,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: AppColors.surface,
+              foregroundColor: AppColors.onSurface,
+            ),
           ),
           locale: locale,
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: [
+          localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -50,9 +61,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-
-
-
-
-

@@ -1,9 +1,10 @@
 import 'dart:convert';
-import 'dart:nativewrappers/_internal/vm/lib/internal_patch.dart';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
- 
+
 enum Environment { development, staging, production }
- 
+
 class Env {
   Env._();
   static Env? _instance;
@@ -12,25 +13,25 @@ class Env {
     return _instance!;
   }
   // Variables
- 
+
   static String get apiBaseUrl => _values['apiUrl'] ?? '';
   static String get apiKey => _values['apiKey'] ?? '';
   static String get appName {
     final appName = _values['appName'];
     if (appName == null) {
-      printToConsole(
+      debugPrint(
         "Warning: 'appName' is not defined in the environment configuration.",
       );
     }
     return _values['appName'] ?? '';
   }
- 
+
   //final String apiBaseUrl;
- 
+
   static Map<String, dynamic> _values = {};
- 
+
   static late final Environment environment;
- 
+
   static Future<void> initialize() async {
     String fileName;
     switch (environment) {
@@ -46,7 +47,7 @@ class Env {
     }
     _values = await load(fileName);
   }
- 
+
   static Future<Map<String, dynamic>> load(String fileName) async {
     // Cargar el archivo JSON correspondiente al entorno
     return rootBundle.loadString(fileName).then((jsonString) {
@@ -54,4 +55,3 @@ class Env {
     });
   }
 }
- 

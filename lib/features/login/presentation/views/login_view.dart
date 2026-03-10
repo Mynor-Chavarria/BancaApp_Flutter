@@ -1,12 +1,28 @@
-import '../../../../core/assets.dart';
-import '../../../../app/presentation/views/home_tabs_view.dart';
-import '../../../../core/environmet/env.dart';
-import '../widgets/social_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../app/presentation/controllers/global_loader_controller.dart';
+import '../../../../app/presentation/views/home_tabs_view.dart';
+import '../../../../core/assets.dart';
+import '../../../../core/environmet/env.dart';
+import '../providers/login_provider.dart';
+import '../widgets/social_widget.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider<LoginProvider>(
+      create: (_) => LoginProvider(),
+      child: const _LoginContent(),
+    );
+  }
+}
+
+class _LoginContent extends StatelessWidget {
+  const _LoginContent();
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +37,7 @@ class LoginView extends StatelessWidget {
             SizedBox(
               height: 150,
               width: double.infinity,
-              child: Image.asset(
-                Assets.logo,
-                fit: BoxFit.contain,
-              ),
+              child: Image.asset(Assets.logo, fit: BoxFit.contain),
             ),
             const BodyWidget(),
           ],
@@ -34,12 +47,6 @@ class LoginView extends StatelessWidget {
   }
 }
 
-class BodyWidget extends StatefulWidget {
-  const BodyWidget({super.key});
-
-  @override
-  State<BodyWidget> createState() => _BodyWidgetState();
-}
 class SocialMedia extends StatelessWidget {
   const SocialMedia({super.key});
 
@@ -58,20 +65,18 @@ class SocialMedia extends StatelessWidget {
   }
 }
 
-class _BodyWidgetState extends State<BodyWidget> {
-  bool _obscurePassword = true;
+class BodyWidget extends StatelessWidget {
+  const BodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final provider = Provider.of<LoginProvider>(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24,
-        vertical: 24,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -83,6 +88,7 @@ class _BodyWidgetState extends State<BodyWidget> {
           ),
           const SizedBox(height: 24),
           TextField(
+            controller: provider.emailController,
             decoration: InputDecoration(
               hintText: l10n.emailAddress,
               filled: true,
@@ -91,19 +97,23 @@ class _BodyWidgetState extends State<BodyWidget> {
           ),
           const SizedBox(height: 16),
           TextField(
-            obscureText: _obscurePassword,
+            controller: provider.passwordController,
+            obscureText: provider.obscurePassword,
             decoration: InputDecoration(
               hintText: l10n.password,
               filled: true,
               border: const OutlineInputBorder(),
               suffixIcon: IconButton(
                 icon: Icon(
-                  _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                  provider.obscurePassword
+                      ? Icons.visibility_off
+                      : Icons.visibility,
                 ),
                 onPressed: () {
-                  setState(() {
-                    _obscurePassword = !_obscurePassword;
-                  });
+                  Provider.of<LoginProvider>(
+                    context,
+                    listen: false,
+                  ).togglePasswordVisibility();
                 },
               ),
             ),
@@ -118,11 +128,22 @@ class _BodyWidgetState extends State<BodyWidget> {
           ),
           const SizedBox(height: 12),
           FilledButton(
-            onPressed: () {
+            onPressed: () async {
+              GlobalLoaderController.instance.setLoading(
+                true,
+                message: l10n.loggingIn,
+              );
+
+              await Future<void>.delayed(const Duration(seconds: 2));
+
+              GlobalLoaderController.instance.setLoading(false);
+
+              if (!context.mounted) {
+                return;
+              }
+
               Navigator.of(context).pushReplacement(
-                MaterialPageRoute<void>(
-                  builder: (_) => const HomeTabsView(),
-                ),
+                MaterialPageRoute<void>(builder: (_) => const HomeTabsView()),
               );
             },
             style: FilledButton.styleFrom(
@@ -164,5 +185,4 @@ class _BodyWidgetState extends State<BodyWidget> {
       ),
     );
   }
-
 }
