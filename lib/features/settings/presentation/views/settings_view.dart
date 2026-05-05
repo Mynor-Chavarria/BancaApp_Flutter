@@ -1,30 +1,26 @@
+import 'package:banca_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../providers/settings_provider.dart';
+import '../../../../app/presentation/providers/locale_provider.dart';
 
-class SettingsView extends StatelessWidget {
+class SettingsView extends ConsumerWidget {
   const SettingsView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider<SettingsProvider>(
-      create: (_) => SettingsProvider(),
-      child: const _SettingsContent(),
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    return const _SettingsContent();
   }
 }
 
-class _SettingsContent extends StatelessWidget {
+class _SettingsContent extends ConsumerWidget {
   const _SettingsContent();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
-    final provider = Provider.of<SettingsProvider>(context);
     final currentLanguageCode =
-        provider.currentLanguageCode ??
+        ref.watch(appLocaleProvider)?.languageCode ??
         Localizations.localeOf(context).languageCode;
 
     return Center(
@@ -64,10 +60,7 @@ class _SettingsContent extends StatelessWidget {
                     if (value == null) {
                       return;
                     }
-                    Provider.of<SettingsProvider>(
-                      context,
-                      listen: false,
-                    ).setLanguageCode(value);
+                    ref.read(appLocaleProvider.notifier).setLanguageCode(value);
                   },
                 ),
               ],

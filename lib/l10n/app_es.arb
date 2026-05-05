@@ -5,6 +5,7 @@
     "transactions": "Transacciones",
     "welcome": "¡Bienvenido!",
     "login": "Iniciar sesión",
+    "username": "Usuario",
     "emailAddress": "Correo electrónico",
     "password": "Contraseña",
     "forgotPassword": "¿Olvidaste tu contraseña?",

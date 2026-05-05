@@ -5,6 +5,7 @@
     "transactions": "Transactions",
     "welcome": "Welcome!",
     "login": "Login",
+    "username": "Username",
     "emailAddress": "Email Address",
     "password": "Password",
     "forgotPassword": "Forgot password?",

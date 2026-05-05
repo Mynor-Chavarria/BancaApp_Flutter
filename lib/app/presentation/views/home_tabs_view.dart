@@ -1,10 +1,10 @@
+import 'package:banca_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_routes.dart';
+import '../../../features/auth/presentation/providers/auth_providers.dart';
 import '../../../features/dashboard/presentation/views/dashboard_view.dart';
 import '../../../features/history/presentation/views/history_view.dart';
 import '../../../features/settings/presentation/views/settings_view.dart';
@@ -13,19 +13,16 @@ import '../controllers/global_loader_controller.dart';
 import '../providers/home_tabs_provider.dart';
 import '../widgets/app_confirm_modal.dart';
 
-class HomeTabsView extends StatelessWidget {
+class HomeTabsView extends ConsumerWidget {
   const HomeTabsView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider<HomeTabsProvider>(
-      create: (_) => HomeTabsProvider(),
-      child: const _HomeTabsContent(),
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    return const _HomeTabsContent();
   }
 }
 
-class _HomeTabsContent extends StatelessWidget {
+class _HomeTabsContent extends ConsumerWidget {
   const _HomeTabsContent();
 
   static const List<Widget> _tabs = [
@@ -36,9 +33,9 @@ class _HomeTabsContent extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
-    final provider = Provider.of<HomeTabsProvider>(context);
+    final currentIndex = ref.watch(homeTabsProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -74,7 +71,7 @@ class _HomeTabsContent extends StatelessWidget {
                 message: l10n.loggingOut,
               );
 
-              await Future<void>.delayed(const Duration(seconds: 2));
+              await ref.read(authNotifierProvider.notifier).logout();
 
               GlobalLoaderController.instance.setLoading(false);
 
@@ -87,14 +84,11 @@ class _HomeTabsContent extends StatelessWidget {
           ),
         ],
       ),
-      body: IndexedStack(index: provider.currentIndex, children: _tabs),
+      body: IndexedStack(index: currentIndex, children: _tabs),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: provider.currentIndex,
+        selectedIndex: currentIndex,
         onDestinationSelected: (index) {
-          Provider.of<HomeTabsProvider>(
-            context,
-            listen: false,
-          ).setCurrentIndex(index);
+          ref.read(homeTabsProvider.notifier).setCurrentIndex(index);
         },
         destinations: [
           NavigationDestination(
