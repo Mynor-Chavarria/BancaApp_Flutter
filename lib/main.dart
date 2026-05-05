@@ -4,9 +4,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'app/presentation/controllers/locale_controller.dart';
 import 'core/environmet/env.dart';
+import 'core/router/app_router.dart';
 import 'core/theme/app_colors.dart';
 import 'core/widgets/global_loader_overlay.dart';
-import 'features/login/presentation/views/login_view.dart';
 
 void main() {
   Env.environment = Environment.development;
@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
     return ValueListenableBuilder<Locale?>(
       valueListenable: appLocaleController,
       builder: (context, locale, _) {
-        return MaterialApp(
+        return MaterialApp.router(
           onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
           builder: (context, child) {
             return GlobalLoaderOverlay(child: child ?? const SizedBox.shrink());
@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          home: const LoginView(),
+          routerConfig: appRouter,
           debugShowCheckedModeBanner: false,
         );
       },

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'package:go_router/go_router.dart';
+
+import '../../../core/router/app_routes.dart';
 import '../../../features/dashboard/presentation/views/dashboard_view.dart';
 import '../../../features/history/presentation/views/history_view.dart';
-import '../../../features/login/presentation/views/login_view.dart';
 import '../../../features/settings/presentation/views/settings_view.dart';
 import '../../../features/transfers/presentation/views/transfers_view.dart';
 import '../controllers/global_loader_controller.dart';
@@ -43,8 +45,8 @@ class _HomeTabsContent extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            if (Navigator.of(context).canPop()) {
-              Navigator.of(context).pop();
+            if (context.canPop()) {
+              context.pop();
             }
           },
         ),
@@ -80,10 +82,7 @@ class _HomeTabsContent extends StatelessWidget {
                 return;
               }
 
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute<void>(builder: (_) => const LoginView()),
-                (route) => false,
-              );
+              context.go(AppRoutes.login);
             },
           ),
         ],
