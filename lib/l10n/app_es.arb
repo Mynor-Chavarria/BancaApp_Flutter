@@ -9,7 +9,7 @@
     "emailAddress": "Correo electrónico",
     "password": "Contraseña",
     "forgotPassword": "¿Olvidaste tu contraseña?",
-    "notMember": "¿No eres miembro?",
+    "notUser": "¿No tienes un usuario?",
     "registerNow": "Regístrate ahora",
     "orContinueWith": "O continúa con",
     "dashboard": "Tablero",
@@ -24,6 +24,11 @@
     "loggingIn": "Iniciando sesión...",
     "loggingOut": "Cerrando sesión...",
     "accept": "Aceptar",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "usernameRequired": "El usuario es obligatorio.",
+    "passwordRequired": "La contraseña es obligatoria.",
+    "passwordMinLength": "La contraseña debe tener al menos 6 caracteres.",
+    "loginFailed": "No fue posible iniciar sesión. Verifica tus credenciales.",
+    "sessionExpired": "Tu sesión expiró. Por favor inicia sesión nuevamente."
     
 }

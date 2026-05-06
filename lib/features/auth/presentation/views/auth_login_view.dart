@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:banca_app/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/presentation/controllers/global_loader_controller.dart';
 import '../../../../core/assets.dart';
-import '../../../../core/environmet/env.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../login/presentation/widgets/social_widget.dart';
 import '../providers/auth_providers.dart';
@@ -41,10 +40,12 @@ class _AuthLoginViewState extends ConsumerState<AuthLoginView> {
     ref.listen<AuthState>(authNotifierProvider, (previous, next) {
       GlobalLoaderController.instance.setLoading(
         next.isLoading,
-        message: next.isLoading ? AppLocalizations.of(context)!.loggingIn : null,
+        message:
+            next.isLoading ? AppLocalizations.of(context)!.loggingIn : null,
       );
 
-      if (next.errorMessage != null && next.errorMessage != previous?.errorMessage) {
+      if (next.errorMessage != null &&
+          next.errorMessage != previous?.errorMessage) {
         ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
           ..showSnackBar(SnackBar(content: Text(next.errorMessage!)));
@@ -52,7 +53,7 @@ class _AuthLoginViewState extends ConsumerState<AuthLoginView> {
       }
 
       if (next.isSuccess && previous?.isSuccess != true) {
-        context.go(AppRoutes.home);
+        context.goNamed(AppRoutes.homeName);
       }
     });
 
@@ -78,7 +79,8 @@ class _AuthLoginViewState extends ConsumerState<AuthLoginView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    Env.appName,
+                    textAlign: TextAlign.center,
+                    l10n.login,
                     style: theme.textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
@@ -117,7 +119,10 @@ class _AuthLoginViewState extends ConsumerState<AuthLoginView> {
                   const SizedBox(height: 8),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: TextButton(onPressed: () {}, child: Text(l10n.forgotPassword)),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(l10n.forgotPassword),
+                    ),
                   ),
                   const SizedBox(height: 12),
                   FilledButton(
@@ -125,22 +130,26 @@ class _AuthLoginViewState extends ConsumerState<AuthLoginView> {
                         state.isLoading
                             ? null
                             : () {
-                              ref.read(authNotifierProvider.notifier).login(
-                                username: _usernameController.text,
-                                password: _passwordController.text,
-                              );
+                              ref
+                                  .read(authNotifierProvider.notifier)
+                                  .login(
+                                    username: _usernameController.text,
+                                    password: _passwordController.text,
+                                    l10n: l10n,
+                                  );
                             },
                     style: FilledButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: const StadiumBorder(),
                     ),
-                    child: Text(l10n.login),
+                    // texto en mayuscula
+                    child: Text(l10n.login.toUpperCase()),
                   ),
                   const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('${l10n.notMember} '),
+                      Text('${l10n.notUser} '),
                       TextButton(
                         onPressed: () {
                           debugPrint('Navigate to Sign Up');
@@ -155,16 +164,6 @@ class _AuthLoginViewState extends ConsumerState<AuthLoginView> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 24),
-                  const Divider(),
-                  const SizedBox(height: 24),
-                  Text(
-                    l10n.orContinueWith,
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.bodyMedium,
-                  ),
-                  const SizedBox(height: 16),
-                  const _SocialMedia(),
                 ],
               ),
             ),

@@ -36,7 +36,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forgotPassword => 'Forgot password?';
 
   @override
-  String get notMember => 'Not a member?';
+  String get notUser => 'Don\'t have an account?';
 
   @override
   String get registerNow => 'Register now';
@@ -82,4 +82,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cancel => 'Cancel';
+
+  @override
+  String get usernameRequired => 'Username is required.';
+
+  @override
+  String get passwordRequired => 'Password is required.';
+
+  @override
+  String get passwordMinLength => 'Password must be at least 6 characters.';
+
+  @override
+  String get loginFailed => 'Could not sign in. Please check your credentials.';
+
+  @override
+  String get sessionExpired => 'Your session expired. Please sign in again.';
 }

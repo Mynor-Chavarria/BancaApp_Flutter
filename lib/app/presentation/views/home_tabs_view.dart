@@ -79,7 +79,7 @@ class _HomeTabsContent extends ConsumerWidget {
                 return;
               }
 
-              context.go(AppRoutes.login);
+              context.goNamed(AppRoutes.loginName);
             },
           ),
         ],

@@ -16,7 +16,15 @@ import '../state/auth_state.dart';
 const _dummyJsonBaseUrl = 'https://dummyjson.com';
 
 final authHttpClientProvider = Provider<AppHttpClient>((ref) {
-  return AppHttpClient(baseUrl: _dummyJsonBaseUrl);
+  return AppHttpClient(
+    baseUrl: _dummyJsonBaseUrl,
+    tokenProvider: () async {
+      return ref.read(authNotifierProvider).session?.accessToken;
+    },
+    onSessionExpired: () async {
+      ref.read(authNotifierProvider.notifier).forceLogout();
+    },
+  );
 });
 
 final authRemoteDataSourceProvider = Provider<AuthRemoteDataSource>((ref) {

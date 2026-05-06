@@ -7,6 +7,8 @@ import '../errors/app_error.dart';
 import '../errors/app_exception.dart';
 import 'interceptors/auth_interceptor.dart';
 
+import 'interceptors/session_expired_interceptor.dart';
+
 class AppHttpClient {
   AppHttpClient._(this._dio);
 
@@ -14,6 +16,7 @@ class AppHttpClient {
     required String baseUrl,
     Map<String, dynamic>? defaultHeaders,
     TokenProvider? tokenProvider,
+    OnSessionExpired? onSessionExpired,
     Duration connectTimeout = const Duration(seconds: 20),
     Duration sendTimeout = const Duration(seconds: 20),
     Duration receiveTimeout = const Duration(seconds: 20),
@@ -35,6 +38,12 @@ class AppHttpClient {
 
     if (tokenProvider != null) {
       dio.interceptors.add(AuthInterceptor(tokenProvider: tokenProvider));
+    }
+
+    if (onSessionExpired != null) {
+      dio.interceptors.add(
+        SessionExpiredInterceptor(onSessionExpired: onSessionExpired),
+      );
     }
 
     if (enableLogging) {

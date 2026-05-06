@@ -9,7 +9,7 @@
     "emailAddress": "Email Address",
     "password": "Password",
     "forgotPassword": "Forgot password?",
-    "notMember": "Not a member?",
+    "notUser": "Don't have an account?",
     "registerNow": "Register now",
     "orContinueWith": "Or continue with",
     "dashboard": "Dashboard",
@@ -24,6 +24,11 @@
     "loggingIn": "Signing in...",
     "loggingOut": "Signing out...",
     "accept": "Accept",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "usernameRequired": "Username is required.",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least 6 characters.",
+    "loginFailed": "Could not sign in. Please check your credentials.",
+    "sessionExpired": "Your session expired. Please sign in again."
     
 }

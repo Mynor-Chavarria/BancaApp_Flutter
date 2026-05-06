@@ -36,7 +36,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get forgotPassword => '¿Olvidaste tu contraseña?';
 
   @override
-  String get notMember => '¿No eres miembro?';
+  String get notUser => '¿No tienes un usuario?';
 
   @override
   String get registerNow => 'Regístrate ahora';
@@ -82,4 +82,19 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get cancel => 'Cancelar';
+
+  @override
+  String get usernameRequired => 'El usuario es obligatorio.';
+
+  @override
+  String get passwordRequired => 'La contraseña es obligatoria.';
+
+  @override
+  String get passwordMinLength => 'La contraseña debe tener al menos 6 caracteres.';
+
+  @override
+  String get loginFailed => 'No fue posible iniciar sesión. Verifica tus credenciales.';
+
+  @override
+  String get sessionExpired => 'Tu sesión expiró. Por favor inicia sesión nuevamente.';
 }
