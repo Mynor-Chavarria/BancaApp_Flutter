@@ -1,9 +1,15 @@
-class TransferEntity {
-  final String reference;
-  final double amount;
-
-  const TransferEntity({
-    required this.reference,
-    required this.amount,
+class TransferTypeEntity {
+  const TransferTypeEntity({
+    required this.id,
+    required this.labelKey,
+    required this.iconCode,
   });
+
+  final String id;
+
+  /// Clave de localización para el nombre del tipo de transferencia.
+  final String labelKey;
+
+  /// Código del icono de Material Icons.
+  final int iconCode;
 }

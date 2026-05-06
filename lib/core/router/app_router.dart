@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import '../../app/presentation/views/home_tabs_view.dart';
 import '../../features/auth/presentation/providers/auth_providers.dart';
 import '../../features/auth/presentation/views/auth_login_view.dart';
+import '../../features/history/presentation/views/account_history_view.dart';
+import '../../features/settings/presentation/views/profile_view.dart';
 import 'app_routes.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -15,7 +17,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       final isOnLogin = state.matchedLocation == AppRoutes.login;
 
       if (session == null && !isOnLogin) return AppRoutes.login;
-      if (session != null && isOnLogin) return AppRoutes.home; // redirect usa path, no name
+      if (session != null && isOnLogin) {
+        return AppRoutes.home; // redirect usa path, no name
+      }
       return null;
     },
     routes: [
@@ -26,8 +30,24 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: AppRoutes.home,
-        name: 'home',
+        name: AppRoutes.homeName,
         builder: (context, state) => const HomeTabsView(),
+      ),
+      GoRoute(
+        path: AppRoutes.profile,
+        name: AppRoutes.profileName,
+        builder: (context, state) => const ProfileView(),
+      ),
+      GoRoute(
+        path: AppRoutes.accountHistory,
+        name: AppRoutes.accountHistoryName,
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>;
+          return AccountHistoryView(
+            accountId: extra['accountId'] as String,
+            accountName: extra['accountName'] as String,
+          );
+        },
       ),
     ],
   );

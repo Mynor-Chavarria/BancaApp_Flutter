@@ -1,6 +1,7 @@
 import 'package:banca_app/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../app/presentation/controllers/global_loader_controller.dart';
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/logout_usecase.dart';
 import '../providers/auth_providers.dart';
@@ -74,13 +75,16 @@ class AuthNotifier extends Notifier<AuthState> {
   }
 
   /// Llamado automáticamente cuando el servidor responde 401 (token expirado).
-  /// Limpia la sesión local sin mostrar loading y resetea el estado.
+  /// Muestra el loader con un mensaje, limpia la sesión y lo oculta.
   Future<void> forceLogout({AppLocalizations? l10n}) async {
-    await _logoutUseCase();
-    final message =
-        l10n?.sessionExpired ??
-        'Tu sesión expiró. Por favor inicia sesión nuevamente.';
-    state = const AuthState().copyWith(errorMessage: message);
+    final loaderMessage = l10n?.sessionEnded ?? 'Sesión finalizada';
+    GlobalLoaderController.instance.show(message: loaderMessage);
+    await Future.wait([
+      _logoutUseCase(),
+      Future.delayed(const Duration(seconds: 2)),
+    ]);
+    GlobalLoaderController.instance.hide();
+    state = const AuthState();
   }
 
   String? _validateUsername(String username, AppLocalizations l10n) {

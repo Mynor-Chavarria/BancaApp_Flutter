@@ -1,8 +1,10 @@
 import 'package:banca_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../app/presentation/providers/locale_provider.dart';
+import '../../../../core/router/app_routes.dart';
 
 class SettingsView extends ConsumerWidget {
   const SettingsView({super.key});
@@ -46,7 +48,7 @@ class _SettingsContent extends ConsumerWidget {
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
-                  value: currentLanguageCode,
+                  initialValue: currentLanguageCode,
                   decoration: InputDecoration(
                     labelText: l10n.language,
                     filled: true,
@@ -62,6 +64,14 @@ class _SettingsContent extends ConsumerWidget {
                     }
                     ref.read(appLocaleProvider.notifier).setLanguageCode(value);
                   },
+                ),
+                const SizedBox(height: 16),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: const Icon(Icons.person_outline),
+                  title: Text(l10n.profile),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => context.pushNamed(AppRoutes.profileName),
                 ),
               ],
             ),

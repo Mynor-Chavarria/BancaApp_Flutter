@@ -48,6 +48,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboard => 'Dashboard';
 
   @override
+  String get home => 'Home';
+
+  @override
   String get history => 'History';
 
   @override
@@ -55,6 +58,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settings => 'Settings';
+
+  @override
+  String get profile => 'Profile';
 
   @override
   String get language => 'Language';
@@ -97,4 +103,106 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sessionExpired => 'Your session expired. Please sign in again.';
+
+  @override
+  String get sessionEnded => 'Session ended';
+
+  @override
+  String get fullName => 'Full name';
+
+  @override
+  String get userId => 'User ID';
+
+  @override
+  String get gender => 'Gender';
+
+  @override
+  String get myAccounts => 'My accounts';
+
+  @override
+  String get accountName => 'Account name';
+
+  @override
+  String get accountMonetary => 'Monetary Account';
+
+  @override
+  String get accountSaving => 'Saving Account';
+
+  @override
+  String get accountNumber => 'Account number';
+
+  @override
+  String get accountHolderName => 'Account holder name';
+
+  @override
+  String get amountInQuetzales => 'Amount in quetzales';
+
+  @override
+  String get noAccountsData => 'No accounts available.';
+
+  @override
+  String get payments => 'Payments';
+
+  @override
+  String get paymentServicePayment => 'Service Payment';
+
+  @override
+  String get paymentMobileRecharge => 'Mobile Recharge';
+
+  @override
+  String get accountHistory => 'History';
+
+  @override
+  String get allMovements => 'All';
+
+  @override
+  String get credit => 'Credit';
+
+  @override
+  String get debit => 'Debit';
+
+  @override
+  String get filterFrom => 'From';
+
+  @override
+  String get filterTo => 'To';
+
+  @override
+  String get noTransactions => 'No transactions in this period.';
+
+  @override
+  String get selectDate => 'Select date';
+
+  @override
+  String get clearFilters => 'Clear filters';
+
+  @override
+  String get movementType => 'Movement type';
+
+  @override
+  String get transferThirdParty => 'Third Party';
+
+  @override
+  String get transferOwn => 'Own Accounts';
+
+  @override
+  String get transferACH => 'Other Banks ACH';
+
+  @override
+  String get transferInternational => 'International';
+
+  @override
+  String get transferServicePayment => 'Service Payment';
+
+  @override
+  String get transferMobileRecharge => 'Mobile Recharge';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get noProfileData => 'No profile data available.';
+
+  @override
+  String get profileLoadFailed => 'Could not load your profile.';
 }

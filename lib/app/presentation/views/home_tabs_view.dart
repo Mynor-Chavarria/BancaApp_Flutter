@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/router/app_routes.dart';
 import '../../../features/auth/presentation/providers/auth_providers.dart';
 import '../../../features/dashboard/presentation/views/dashboard_view.dart';
-import '../../../features/history/presentation/views/history_view.dart';
+import '../../../features/payments/presentation/views/payments_view.dart';
 import '../../../features/settings/presentation/views/settings_view.dart';
 import '../../../features/transfers/presentation/views/transfers_view.dart';
 import '../controllers/global_loader_controller.dart';
@@ -28,7 +28,7 @@ class _HomeTabsContent extends ConsumerWidget {
   static const List<Widget> _tabs = [
     DashboardView(),
     TransfersView(),
-    HistoryView(),
+    PaymentsView(),
     SettingsView(),
   ];
 
@@ -86,15 +86,16 @@ class _HomeTabsContent extends ConsumerWidget {
       ),
       body: IndexedStack(index: currentIndex, children: _tabs),
       bottomNavigationBar: NavigationBar(
+        indicatorColor: Theme.of(context).colorScheme.primaryContainer,
         selectedIndex: currentIndex,
         onDestinationSelected: (index) {
           ref.read(homeTabsProvider.notifier).setCurrentIndex(index);
         },
         destinations: [
           NavigationDestination(
-            icon: const Icon(Icons.dashboard_outlined),
-            selectedIcon: const Icon(Icons.dashboard),
-            label: l10n.dashboard,
+            icon: const Icon(Icons.home_outlined),
+            selectedIcon: const Icon(Icons.home),
+            label: l10n.home,
           ),
           NavigationDestination(
             icon: const Icon(Icons.swap_horiz_outlined),
@@ -102,9 +103,9 @@ class _HomeTabsContent extends ConsumerWidget {
             label: l10n.transfers,
           ),
           NavigationDestination(
-            icon: const Icon(Icons.history_outlined),
-            selectedIcon: const Icon(Icons.history),
-            label: l10n.history,
+            icon: const Icon(Icons.payment_outlined),
+            selectedIcon: const Icon(Icons.payment),
+            label: l10n.payments,
           ),
           NavigationDestination(
             icon: const Icon(Icons.settings_outlined),

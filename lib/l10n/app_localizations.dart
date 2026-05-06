@@ -173,6 +173,12 @@ abstract class AppLocalizations {
   /// **'Dashboard'**
   String get dashboard;
 
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
   /// No description provided for @history.
   ///
   /// In en, this message translates to:
@@ -190,6 +196,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get settings;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
 
   /// No description provided for @language.
   ///
@@ -274,6 +286,210 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your session expired. Please sign in again.'**
   String get sessionExpired;
+
+  /// No description provided for @sessionEnded.
+  ///
+  /// In en, this message translates to:
+  /// **'Session ended'**
+  String get sessionEnded;
+
+  /// No description provided for @fullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get fullName;
+
+  /// No description provided for @userId.
+  ///
+  /// In en, this message translates to:
+  /// **'User ID'**
+  String get userId;
+
+  /// No description provided for @gender.
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get gender;
+
+  /// No description provided for @myAccounts.
+  ///
+  /// In en, this message translates to:
+  /// **'My accounts'**
+  String get myAccounts;
+
+  /// No description provided for @accountName.
+  ///
+  /// In en, this message translates to:
+  /// **'Account name'**
+  String get accountName;
+
+  /// No description provided for @accountMonetary.
+  ///
+  /// In en, this message translates to:
+  /// **'Monetary Account'**
+  String get accountMonetary;
+
+  /// No description provided for @accountSaving.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving Account'**
+  String get accountSaving;
+
+  /// No description provided for @accountNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Account number'**
+  String get accountNumber;
+
+  /// No description provided for @accountHolderName.
+  ///
+  /// In en, this message translates to:
+  /// **'Account holder name'**
+  String get accountHolderName;
+
+  /// No description provided for @amountInQuetzales.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount in quetzales'**
+  String get amountInQuetzales;
+
+  /// No description provided for @noAccountsData.
+  ///
+  /// In en, this message translates to:
+  /// **'No accounts available.'**
+  String get noAccountsData;
+
+  /// No description provided for @payments.
+  ///
+  /// In en, this message translates to:
+  /// **'Payments'**
+  String get payments;
+
+  /// No description provided for @paymentServicePayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Service Payment'**
+  String get paymentServicePayment;
+
+  /// No description provided for @paymentMobileRecharge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile Recharge'**
+  String get paymentMobileRecharge;
+
+  /// No description provided for @accountHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get accountHistory;
+
+  /// No description provided for @allMovements.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get allMovements;
+
+  /// No description provided for @credit.
+  ///
+  /// In en, this message translates to:
+  /// **'Credit'**
+  String get credit;
+
+  /// No description provided for @debit.
+  ///
+  /// In en, this message translates to:
+  /// **'Debit'**
+  String get debit;
+
+  /// No description provided for @filterFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get filterFrom;
+
+  /// No description provided for @filterTo.
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get filterTo;
+
+  /// No description provided for @noTransactions.
+  ///
+  /// In en, this message translates to:
+  /// **'No transactions in this period.'**
+  String get noTransactions;
+
+  /// No description provided for @selectDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Select date'**
+  String get selectDate;
+
+  /// No description provided for @clearFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear filters'**
+  String get clearFilters;
+
+  /// No description provided for @movementType.
+  ///
+  /// In en, this message translates to:
+  /// **'Movement type'**
+  String get movementType;
+
+  /// No description provided for @transferThirdParty.
+  ///
+  /// In en, this message translates to:
+  /// **'Third Party'**
+  String get transferThirdParty;
+
+  /// No description provided for @transferOwn.
+  ///
+  /// In en, this message translates to:
+  /// **'Own Accounts'**
+  String get transferOwn;
+
+  /// No description provided for @transferACH.
+  ///
+  /// In en, this message translates to:
+  /// **'Other Banks ACH'**
+  String get transferACH;
+
+  /// No description provided for @transferInternational.
+  ///
+  /// In en, this message translates to:
+  /// **'International'**
+  String get transferInternational;
+
+  /// No description provided for @transferServicePayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Service Payment'**
+  String get transferServicePayment;
+
+  /// No description provided for @transferMobileRecharge.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile Recharge'**
+  String get transferMobileRecharge;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @noProfileData.
+  ///
+  /// In en, this message translates to:
+  /// **'No profile data available.'**
+  String get noProfileData;
+
+  /// No description provided for @profileLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load your profile.'**
+  String get profileLoadFailed;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

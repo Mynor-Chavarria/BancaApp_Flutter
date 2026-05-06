@@ -6,7 +6,7 @@ part 'auth_session_model.freezed.dart';
 part 'auth_session_model.g.dart';
 
 @freezed
-class AuthSessionModel with _$AuthSessionModel {
+abstract class AuthSessionModel with _$AuthSessionModel {
   const factory AuthSessionModel({
     required int id,
     required String username,

@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import '../../../../app/presentation/controllers/global_loader_controller.dart';
 import '../../../../core/assets.dart';
 import '../../../../core/router/app_routes.dart';
-import '../../../login/presentation/widgets/social_widget.dart';
 import '../providers/auth_providers.dart';
 import '../state/auth_state.dart';
 
@@ -170,24 +169,6 @@ class _AuthLoginViewState extends ConsumerState<AuthLoginView> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _SocialMedia extends StatelessWidget {
-  const _SocialMedia();
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SocialWidget.google(),
-        const SizedBox(width: 16),
-        SocialWidget.apple(),
-        const SizedBox(width: 16),
-        SocialWidget.facebook(),
-      ],
     );
   }
 }

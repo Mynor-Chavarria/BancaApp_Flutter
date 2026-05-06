@@ -32,7 +32,7 @@ final authRemoteDataSourceProvider = Provider<AuthRemoteDataSource>((ref) {
 });
 
 final authLocalDataSourceProvider = Provider<AuthLocalDataSource>((ref) {
-  return AuthLocalDataSourceImpl(SharedPreferences.getInstance);
+  return const AuthLocalDataSourceImpl(SharedPreferences.getInstance);
 });
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
