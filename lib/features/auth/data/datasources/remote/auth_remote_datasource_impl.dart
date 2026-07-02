@@ -17,7 +17,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       data: {
         'username': username.trim(),
         'password': password,
-        'expiresInMins': 1,
+        'expiresInMins': 5,
       },
     );
 

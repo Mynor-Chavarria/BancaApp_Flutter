@@ -51,6 +51,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get home => 'Home';
 
   @override
+  String greeting(String name) {
+    return 'Hello, $name';
+  }
+
+  @override
   String get history => 'History';
 
   @override

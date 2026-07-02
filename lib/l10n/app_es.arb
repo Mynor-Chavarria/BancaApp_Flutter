@@ -14,6 +14,14 @@
     "orContinueWith": "O continúa con",
     "dashboard": "Tablero",
     "home": "Inicio",
+    "greeting": "Hola, {name}",
+    "@greeting": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
     "history": "Historial",
     "transfers": "Transferencias",
     "settings": "Configuración",

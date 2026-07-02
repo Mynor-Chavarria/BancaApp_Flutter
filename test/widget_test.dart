@@ -15,9 +15,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class _FakeAuthRepository implements AuthRepository {
+  _FakeAuthRepository({this.persistedSession});
+
+  final AuthSession? persistedSession;
+
   @override
   Future<AuthSession?> getPersistedSession() async {
-    return null;
+    return persistedSession;
   }
 
   @override
@@ -39,6 +43,32 @@ class _FakeAuthRepository implements AuthRepository {
 }
 
 void main() {
+  test('restores the persisted session on startup', () async {
+    const persistedSession = AuthSession(
+      userId: 1,
+      username: 'emilys',
+      email: 'emily@dummyjson.com',
+      accessToken: 'token',
+      refreshToken: 'refresh-token',
+      firstName: 'Emily',
+    );
+    final container = ProviderContainer(
+      overrides: [
+        authRepositoryProvider.overrideWithValue(
+          _FakeAuthRepository(persistedSession: persistedSession),
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    container.read(authNotifierProvider);
+    await pumpEventQueue();
+
+    final state = container.read(authNotifierProvider);
+    expect(state.isLoading, isFalse);
+    expect(state.session, persistedSession);
+  });
+
   testWidgets('opens login and navigates to dashboard tabs', (
     WidgetTester tester,
   ) async {

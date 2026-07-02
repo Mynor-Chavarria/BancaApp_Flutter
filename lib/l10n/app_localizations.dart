@@ -179,6 +179,12 @@ abstract class AppLocalizations {
   /// **'Home'**
   String get home;
 
+  /// No description provided for @greeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello, {name}'**
+  String greeting(String name);
+
   /// No description provided for @history.
   ///
   /// In en, this message translates to:

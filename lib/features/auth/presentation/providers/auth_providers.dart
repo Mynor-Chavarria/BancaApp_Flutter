@@ -10,6 +10,7 @@ import '../../data/repositories/auth_repository_impl.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/logout_usecase.dart';
+import '../../domain/usecases/restore_session_usecase.dart';
 import '../notifiers/auth_notifier.dart';
 import '../state/auth_state.dart';
 
@@ -48,6 +49,10 @@ final loginUseCaseProvider = Provider<LoginUseCase>((ref) {
 
 final logoutUseCaseProvider = Provider<LogoutUseCase>((ref) {
   return LogoutUseCase(ref.watch(authRepositoryProvider));
+});
+
+final restoreSessionUseCaseProvider = Provider<RestoreSessionUseCase>((ref) {
+  return RestoreSessionUseCase(ref.watch(authRepositoryProvider));
 });
 
 final authNotifierProvider = NotifierProvider<AuthNotifier, AuthState>(

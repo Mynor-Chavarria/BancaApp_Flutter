@@ -14,6 +14,14 @@
     "orContinueWith": "Or continue with",
     "dashboard": "Dashboard",
     "home": "Home",
+    "greeting": "Hello, {name}",
+    "@greeting": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
     "history": "History",
     "transfers": "Transfers",
     "settings": "Settings",

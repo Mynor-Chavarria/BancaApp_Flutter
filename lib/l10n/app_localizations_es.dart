@@ -51,6 +51,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get home => 'Inicio';
 
   @override
+  String greeting(String name) {
+    return 'Hola, $name';
+  }
+
+  @override
   String get history => 'Historial';
 
   @override

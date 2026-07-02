@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/router/app_routes.dart';
+import '../../../auth/presentation/providers/auth_providers.dart';
 import '../providers/dashboard_notifier_provider.dart';
 
 class DashboardView extends ConsumerStatefulWidget {
@@ -27,7 +28,12 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final state = ref.watch(dashboardNotifierProvider);
+    final session = ref.watch(authNotifierProvider).session;
     final quetzalesFormatter = NumberFormat('Q #,##0.00', 'en_US');
+    final userName =
+        session?.firstName?.trim().isNotEmpty == true
+            ? session!.firstName!.trim()
+            : session?.username.trim();
 
     if (state.isLoading && state.accounts.isEmpty) {
       return const Center(child: CircularProgressIndicator());
@@ -63,7 +69,9 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
       children: [
         Text(
-          l10n.home,
+          userName == null || userName.isEmpty
+              ? l10n.home
+              : l10n.greeting(userName),
           style: Theme.of(
             context,
           ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700),

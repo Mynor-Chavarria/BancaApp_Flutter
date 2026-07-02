@@ -4,15 +4,34 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/presentation/controllers/global_loader_controller.dart';
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/logout_usecase.dart';
+import '../../domain/usecases/restore_session_usecase.dart';
 import '../providers/auth_providers.dart';
 import '../state/auth_state.dart';
 
 class AuthNotifier extends Notifier<AuthState> {
   @override
-  AuthState build() => const AuthState();
+  AuthState build() {
+    Future.microtask(_restoreSession);
+    return const AuthState(isLoading: true);
+  }
 
   LoginUseCase get _loginUseCase => ref.read(loginUseCaseProvider);
   LogoutUseCase get _logoutUseCase => ref.read(logoutUseCaseProvider);
+  RestoreSessionUseCase get _restoreSessionUseCase =>
+      ref.read(restoreSessionUseCaseProvider);
+
+  Future<void> _restoreSession() async {
+    try {
+      final session = await _restoreSessionUseCase();
+      state = state.copyWith(
+        isLoading: false,
+        isSuccess: false,
+        session: session,
+      );
+    } catch (_) {
+      state = const AuthState();
+    }
+  }
 
   void togglePasswordVisibility() {
     state = state.copyWith(obscurePassword: !state.obscurePassword);
