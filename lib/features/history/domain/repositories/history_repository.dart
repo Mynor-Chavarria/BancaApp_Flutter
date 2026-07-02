@@ -1,5 +1,8 @@
 import '../entities/history_entity.dart';
 
 abstract class HistoryRepository {
-  Future<List<HistoryEntity>> getHistory();
+  Future<List<AccountTransactionEntity>> getTransactions({
+    required String accountId,
+    TransactionType? type,
+  });
 }

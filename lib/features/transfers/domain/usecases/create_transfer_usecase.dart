@@ -1,12 +1,12 @@
 import '../entities/transfer_entity.dart';
 import '../repositories/transfer_repository.dart';
 
-class CreateTransferUseCase {
-  final TransferRepository repository;
+class GetTransferTypesUseCase {
+  const GetTransferTypesUseCase(this._repository);
 
-  const CreateTransferUseCase(this.repository);
+  final TransferRepository _repository;
 
-  Future<TransferEntity> call() {
-    return repository.createTransfer();
+  Future<List<TransferTypeEntity>> call() {
+    return _repository.getTransferTypes();
   }
 }

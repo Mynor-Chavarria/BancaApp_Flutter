@@ -2,11 +2,11 @@ import '../entities/dashboard_entity.dart';
 import '../repositories/dashboard_repository.dart';
 
 class GetDashboardUseCase {
-  final DashboardRepository repository;
+  const GetDashboardUseCase(this._repository);
 
-  const GetDashboardUseCase(this.repository);
+  final DashboardRepository _repository;
 
-  Future<DashboardEntity> call() {
-    return repository.getDashboardData();
+  Future<List<DashboardEntity>> call() {
+    return _repository.getMyAccounts();
   }
 }

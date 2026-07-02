@@ -2,7 +2,7 @@ name: banca_app
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -32,7 +32,13 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: ^0.19.0
+  dio: ^5.9.2
+  go_router: ^14.0.0
+  intl: ^0.20.2
+  flutter_riverpod: ^2.6.1
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
+  shared_preferences: ^2.3.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -41,6 +47,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^2.4.13
+  freezed: ^3.2.3
+  json_serializable: ^6.9.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -54,7 +63,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   generate: true
 
   # The following line ensures that the Material Icons font is
@@ -66,9 +74,6 @@ flutter:
   assets:
     - assets/images/
     - env_dev.json
-
-
-
 
   #   - images/a_dot_ham.jpeg
 

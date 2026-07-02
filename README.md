@@ -92,6 +92,32 @@ flutter analyze
 flutter test
 ```
 
+## Generación de código
+
+El proyecto usa `freezed` y `json_serializable` para generar código boilerplate (modelos inmutables, `fromJson`/`toJson`, `copyWith`, etc.).
+
+Los archivos generados tienen extensión `.freezed.dart` y `.g.dart`. **No los edites manualmente.**
+
+### Generar una sola vez
+
+```bash
+dart run build_runner build --delete-conflicting-outputs
+```
+
+### Modo watch (regenera automáticamente al guardar)
+
+```bash
+dart run build_runner watch --delete-conflicting-outputs
+```
+
+### Solo generar localizaciones
+
+```bash
+flutter gen-l10n
+```
+
+> Ejecuta `build_runner` cada vez que agregues o modifiques una clase anotada con `@freezed` o `@JsonSerializable`.
+
 ## Git (opcional, si inicias repo local)
 
 Si este proyecto aún no tiene repositorio Git:
