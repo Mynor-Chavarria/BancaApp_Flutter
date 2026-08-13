@@ -5,6 +5,7 @@ part 'auth_session.freezed.dart';
 @freezed
 abstract class AuthSession with _$AuthSession {
   const factory AuthSession({
+    required String uid,
     required int userId,
     required String username,
     required String email,
@@ -13,5 +14,6 @@ abstract class AuthSession with _$AuthSession {
     String? firstName,
     String? lastName,
     String? image,
+    String? gender,
   }) = _AuthSession;
 }

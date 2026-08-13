@@ -125,6 +125,12 @@ abstract class AppLocalizations {
   /// **'Login'**
   String get login;
 
+  /// No description provided for @createAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get createAccount;
+
   /// No description provided for @username.
   ///
   /// In en, this message translates to:
@@ -160,6 +166,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Register now'**
   String get registerNow;
+
+  /// No description provided for @alreadyHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get alreadyHaveAccount;
 
   /// No description provided for @orContinueWith.
   ///
@@ -251,6 +263,12 @@ abstract class AppLocalizations {
   /// **'Signing out...'**
   String get loggingOut;
 
+  /// No description provided for @creatingAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Creating account...'**
+  String get creatingAccount;
+
   /// No description provided for @accept.
   ///
   /// In en, this message translates to:
@@ -262,6 +280,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancel;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required.'**
+  String get emailRequired;
+
+  /// No description provided for @emailInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email address.'**
+  String get emailInvalid;
+
+  /// No description provided for @fullNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name is required.'**
+  String get fullNameRequired;
+
+  /// No description provided for @genderRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Gender is required.'**
+  String get genderRequired;
 
   /// No description provided for @usernameRequired.
   ///
@@ -286,6 +328,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not sign in. Please check your credentials.'**
   String get loginFailed;
+
+  /// No description provided for @registrationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not create the account. Please check the data.'**
+  String get registrationFailed;
 
   /// No description provided for @sessionExpired.
   ///
@@ -317,10 +365,28 @@ abstract class AppLocalizations {
   /// **'Gender'**
   String get gender;
 
+  /// No description provided for @genderFemale.
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get genderFemale;
+
+  /// No description provided for @genderMale.
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get genderMale;
+
+  /// No description provided for @genderOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get genderOther;
+
   /// No description provided for @myAccounts.
   ///
   /// In en, this message translates to:
-  /// **'My accounts'**
+  /// **'My products'**
   String get myAccounts;
 
   /// No description provided for @accountName.
@@ -340,6 +406,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Saving Account'**
   String get accountSaving;
+
+  /// No description provided for @creditCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Credit Card'**
+  String get creditCard;
 
   /// No description provided for @accountNumber.
   ///
@@ -436,6 +508,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Clear filters'**
   String get clearFilters;
+
+  /// No description provided for @loadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get loadMore;
 
   /// No description provided for @movementType.
   ///

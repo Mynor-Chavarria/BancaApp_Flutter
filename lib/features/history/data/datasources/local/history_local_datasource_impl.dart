@@ -13,7 +13,7 @@ class HistoryLocalDataSourceImpl implements HistoryLocalDataSource {
     DateTime d(int days) => now.subtract(Duration(days: days));
 
     final Map<String, List<AccountTransactionModel>> data = {
-      '0101 2233 4455 6677': [
+      '0101223344556677': [
         AccountTransactionModel(
           id: 'TXN-001',
           date: d(1),
@@ -99,7 +99,7 @@ class HistoryLocalDataSourceImpl implements HistoryLocalDataSource {
           amount: 199.00,
         ),
       ],
-      '0101 9988 7766 5544': [
+      '0101998877665544': [
         AccountTransactionModel(
           id: 'TXN-101',
           date: d(1),
@@ -157,8 +157,35 @@ class HistoryLocalDataSourceImpl implements HistoryLocalDataSource {
           amount: 1200.00,
         ),
       ],
+      '4500123456789010': [
+        AccountTransactionModel(
+          id: 'TXN-201',
+          date: d(2),
+          description: 'Compra en línea',
+          type: TransactionType.debit,
+          amount: 125.40,
+        ),
+        AccountTransactionModel(
+          id: 'TXN-202',
+          date: d(5),
+          description: 'Pago de tarjeta',
+          type: TransactionType.credit,
+          amount: 300.00,
+        ),
+        AccountTransactionModel(
+          id: 'TXN-203',
+          date: d(11),
+          description: 'Hotel',
+          type: TransactionType.debit,
+          amount: 220.00,
+        ),
+      ],
     };
 
-    return data[accountId] ?? [];
+    return data[_normalizeAccountId(accountId)] ?? [];
+  }
+
+  String _normalizeAccountId(String accountId) {
+    return accountId.replaceAll(RegExp(r'\s+'), '');
   }
 }

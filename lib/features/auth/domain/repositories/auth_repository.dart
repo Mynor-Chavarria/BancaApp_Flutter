@@ -6,6 +6,13 @@ abstract class AuthRepository {
     required String password,
   });
 
+  Future<AuthSession> register({
+    required String fullName,
+    required String email,
+    required String gender,
+    required String password,
+  });
+
   Future<void> logout();
 
   Future<AuthSession?> getPersistedSession();

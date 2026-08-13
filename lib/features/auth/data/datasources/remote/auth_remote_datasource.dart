@@ -5,4 +5,13 @@ abstract class AuthRemoteDataSource {
     required String username,
     required String password,
   });
+
+  Future<AuthSessionModel> register({
+    required String fullName,
+    required String email,
+    required String gender,
+    required String password,
+  });
+
+  Future<void> logout();
 }

@@ -3,6 +3,9 @@ import '../../domain/entities/history_entity.dart';
 class AccountHistoryState {
   const AccountHistoryState({
     this.isLoading = false,
+    this.isLoadingMore = false,
+    this.hasMore = true,
+    this.errorMessage,
     this.allTransactions = const [],
     this.fromDate,
     this.toDate,
@@ -10,6 +13,9 @@ class AccountHistoryState {
   });
 
   final bool isLoading;
+  final bool isLoadingMore;
+  final bool hasMore;
+  final String? errorMessage;
   final List<AccountTransactionEntity> allTransactions;
   final DateTime? fromDate;
   final DateTime? toDate;
@@ -31,6 +37,9 @@ class AccountHistoryState {
 
   AccountHistoryState copyWith({
     bool? isLoading,
+    bool? isLoadingMore,
+    bool? hasMore,
+    Object? errorMessage = _noChange,
     List<AccountTransactionEntity>? allTransactions,
     DateTime? Function()? fromDate,
     DateTime? Function()? toDate,
@@ -38,6 +47,12 @@ class AccountHistoryState {
   }) {
     return AccountHistoryState(
       isLoading: isLoading ?? this.isLoading,
+      isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+      hasMore: hasMore ?? this.hasMore,
+      errorMessage:
+          identical(errorMessage, _noChange)
+              ? this.errorMessage
+              : errorMessage as String?,
       allTransactions: allTransactions ?? this.allTransactions,
       fromDate: fromDate != null ? fromDate() : this.fromDate,
       toDate: toDate != null ? toDate() : this.toDate,
@@ -45,3 +60,5 @@ class AccountHistoryState {
     );
   }
 }
+
+const _noChange = Object();

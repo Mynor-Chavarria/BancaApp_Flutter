@@ -11,6 +11,19 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
+devtools_options.yaml
+firepit-log.txt
+
+# Environment / local secrets
+.env
+.env.*
+!.env.example
+serviceAccount*.json
+*-service-account.json
+firebase-debug.log
+firestore-debug.log
+database-debug.log
+ui-debug.log
 
 # IntelliJ related
 *.iml
@@ -33,6 +46,15 @@ migrate_working_dir/
 .pub/
 /build/
 
+# iOS/macOS local generated files
+ios/Pods/
+macos/Pods/
+ios/Runner.xcodeproj/xcuserdata/
+ios/Runner.xcworkspace/xcuserdata/
+macos/Runner.xcodeproj/xcuserdata/
+macos/Runner.xcworkspace/xcuserdata/
+*.xcuserstate
+
 # Symbolication related
 app.*.symbols
 
@@ -43,3 +65,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Android signing keys
+android/key.properties
+android/app/*.jks
+android/app/*.keystore
+*.jks
+*.keystore

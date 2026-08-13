@@ -24,6 +24,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login => 'Login';
 
   @override
+  String get createAccount => 'Create account';
+
+  @override
   String get username => 'Username';
 
   @override
@@ -40,6 +43,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get registerNow => 'Register now';
+
+  @override
+  String get alreadyHaveAccount => 'Already have an account?';
 
   @override
   String get orContinueWith => 'Or continue with';
@@ -89,10 +95,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loggingOut => 'Signing out...';
 
   @override
+  String get creatingAccount => 'Creating account...';
+
+  @override
   String get accept => 'Accept';
 
   @override
   String get cancel => 'Cancel';
+
+  @override
+  String get emailRequired => 'Email is required.';
+
+  @override
+  String get emailInvalid => 'Enter a valid email address.';
+
+  @override
+  String get fullNameRequired => 'Full name is required.';
+
+  @override
+  String get genderRequired => 'Gender is required.';
 
   @override
   String get usernameRequired => 'Username is required.';
@@ -105,6 +126,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loginFailed => 'Could not sign in. Please check your credentials.';
+
+  @override
+  String get registrationFailed => 'Could not create the account. Please check the data.';
 
   @override
   String get sessionExpired => 'Your session expired. Please sign in again.';
@@ -122,7 +146,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gender => 'Gender';
 
   @override
-  String get myAccounts => 'My accounts';
+  String get genderFemale => 'Female';
+
+  @override
+  String get genderMale => 'Male';
+
+  @override
+  String get genderOther => 'Other';
+
+  @override
+  String get myAccounts => 'My products';
 
   @override
   String get accountName => 'Account name';
@@ -132,6 +165,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get accountSaving => 'Saving Account';
+
+  @override
+  String get creditCard => 'Credit Card';
 
   @override
   String get accountNumber => 'Account number';
@@ -180,6 +216,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get clearFilters => 'Clear filters';
+
+  @override
+  String get loadMore => 'Load more';
 
   @override
   String get movementType => 'Movement type';
