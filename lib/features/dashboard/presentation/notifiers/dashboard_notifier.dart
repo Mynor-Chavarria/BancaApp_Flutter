@@ -31,8 +31,11 @@ class DashboardNotifier extends Notifier<DashboardState> {
         isLoading: false,
         errorMessage: error.error.message,
       );
-    } catch (_) {
-      state = state.copyWith(isLoading: false, errorMessage: null);
+    } catch (error) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: 'No fue posible cargar las cuentas: $error',
+      );
     }
   }
 }

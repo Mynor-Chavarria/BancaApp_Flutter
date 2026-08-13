@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "463336633528",
+    "project_id": "banca-app-d6c65",
+    "storage_bucket": "banca-app-d6c65.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463336633528:android:41d0ae568d778d53d2304d",
+        "android_client_info": {
+          "package_name": "com.example.app1_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJF2OmX-Y4AbNZS_llAQC4rACB438s9rY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -24,6 +24,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get login => 'Iniciar sesión';
 
   @override
+  String get createAccount => 'Crear cuenta';
+
+  @override
   String get username => 'Usuario';
 
   @override
@@ -40,6 +43,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get registerNow => 'Regístrate ahora';
+
+  @override
+  String get alreadyHaveAccount => '¿Ya tienes una cuenta?';
 
   @override
   String get orContinueWith => 'O continúa con';
@@ -89,10 +95,25 @@ class AppLocalizationsEs extends AppLocalizations {
   String get loggingOut => 'Cerrando sesión...';
 
   @override
+  String get creatingAccount => 'Creando cuenta...';
+
+  @override
   String get accept => 'Aceptar';
 
   @override
   String get cancel => 'Cancelar';
+
+  @override
+  String get emailRequired => 'El correo electronico es obligatorio.';
+
+  @override
+  String get emailInvalid => 'Ingresa un correo electronico valido.';
+
+  @override
+  String get fullNameRequired => 'El nombre completo es obligatorio.';
+
+  @override
+  String get genderRequired => 'El genero es obligatorio.';
 
   @override
   String get usernameRequired => 'El usuario es obligatorio.';
@@ -105,6 +126,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get loginFailed => 'No fue posible iniciar sesión. Verifica tus credenciales.';
+
+  @override
+  String get registrationFailed => 'No fue posible crear la cuenta. Verifica los datos.';
 
   @override
   String get sessionExpired => 'Tu sesión expiró. Por favor inicia sesión nuevamente.';
@@ -122,7 +146,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get gender => 'Género';
 
   @override
-  String get myAccounts => 'Mis cuentas';
+  String get genderFemale => 'Femenino';
+
+  @override
+  String get genderMale => 'Masculino';
+
+  @override
+  String get genderOther => 'Otro';
+
+  @override
+  String get myAccounts => 'Mis productos';
 
   @override
   String get accountName => 'Nombre de la cuenta';
@@ -132,6 +165,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get accountSaving => 'Cuenta de Ahorro';
+
+  @override
+  String get creditCard => 'Tarjeta de Crédito';
 
   @override
   String get accountNumber => 'Número de cuenta';
@@ -180,6 +216,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get clearFilters => 'Limpiar filtros';
+
+  @override
+  String get loadMore => 'Cargar más';
 
   @override
   String get movementType => 'Tipo de movimiento';

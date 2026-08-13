@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../core/router/app_routes.dart';
 import '../../../auth/presentation/providers/auth_providers.dart';
+import '../../domain/entities/dashboard_entity.dart';
 import '../providers/dashboard_notifier_provider.dart';
 
 class DashboardView extends ConsumerStatefulWidget {
@@ -29,7 +30,6 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
     final l10n = AppLocalizations.of(context)!;
     final state = ref.watch(dashboardNotifierProvider);
     final session = ref.watch(authNotifierProvider).session;
-    final quetzalesFormatter = NumberFormat('Q #,##0.00', 'en_US');
     final userName =
         session?.firstName?.trim().isNotEmpty == true
             ? session!.firstName!.trim()
@@ -98,7 +98,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                   () => context.pushNamed(
                     AppRoutes.accountHistoryName,
                     extra: {
-                      'accountId': account.accountNumber,
+                      'accountId': account.id,
                       'accountName': localizedAccountName,
                     },
                   ),
@@ -127,6 +127,11 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                             style: Theme.of(context).textTheme.bodyMedium
                                 ?.copyWith(color: Colors.black54),
                           ),
+                          const SizedBox(height: 4),
+                          Text(
+                            account.currency,
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
                         ],
                       ),
                     ),
@@ -147,9 +152,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                         ),
                         child: Center(
                           child: Text(
-                            quetzalesFormatter.format(
-                              account.amountInQuetzales,
-                            ),
+                            _formatAmount(account),
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.titleMedium
                                 ?.copyWith(fontWeight: FontWeight.w800),
@@ -173,8 +176,16 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
         return l10n.accountMonetary;
       case 'accountSaving':
         return l10n.accountSaving;
+      case 'creditCard':
+        return l10n.creditCard;
       default:
         return key;
     }
+  }
+
+  String _formatAmount(DashboardEntity account) {
+    final symbol = account.currency == 'USD' ? r'$' : 'Q';
+    final formatter = NumberFormat('$symbol #,##0.00', 'en_US');
+    return formatter.format(account.availableBalance);
   }
 }

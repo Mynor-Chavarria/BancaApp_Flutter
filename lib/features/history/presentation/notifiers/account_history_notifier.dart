@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/errors/app_exception.dart';
 import '../../domain/entities/history_entity.dart';
 import '../../domain/usecases/get_history_usecase.dart';
 import '../providers/history_providers.dart';
@@ -9,18 +10,79 @@ class AccountHistoryNotifier extends Notifier<AccountHistoryState> {
   @override
   AccountHistoryState build() {
     final now = DateTime.now();
-    _useCase = ref.watch(getAccountTransactionsUseCaseProvider);
+    _pageUseCase = ref.watch(getAccountTransactionsPageUseCaseProvider);
     return AccountHistoryState(
       fromDate: now.subtract(const Duration(days: 30)),
       toDate: now,
     );
   }
 
-  late final GetAccountTransactionsUseCase _useCase;
+  late final GetAccountTransactionsPageUseCase _pageUseCase;
+
   Future<void> loadTransactions(String accountId) async {
-    state = state.copyWith(isLoading: true);
-    final transactions = await _useCase(accountId: accountId);
-    state = state.copyWith(isLoading: false, allTransactions: transactions);
+    await loadFirstPage(accountId);
+  }
+
+  Future<void> loadFirstPage(String accountId) async {
+    state = state.copyWith(
+      isLoading: true,
+      isLoadingMore: false,
+      hasMore: true,
+      errorMessage: null,
+      allTransactions: [],
+    );
+
+    try {
+      final page = await _pageUseCase(
+        accountId: accountId,
+        limit: 5,
+        reset: true,
+      );
+      state = state.copyWith(
+        isLoading: false,
+        allTransactions: page.transactions,
+        hasMore: page.hasMore,
+      );
+    } on AppException catch (error) {
+      state = state.copyWith(
+        isLoading: false,
+        hasMore: false,
+        errorMessage: error.error.message,
+      );
+    } catch (error) {
+      state = state.copyWith(
+        isLoading: false,
+        hasMore: false,
+        errorMessage: 'No fue posible cargar movimientos: $error',
+      );
+    }
+  }
+
+  Future<void> loadNextPage(String accountId) async {
+    if (state.isLoading || state.isLoadingMore || !state.hasMore) {
+      return;
+    }
+
+    state = state.copyWith(isLoadingMore: true, errorMessage: null);
+
+    try {
+      final page = await _pageUseCase(accountId: accountId, limit: 5);
+      state = state.copyWith(
+        isLoadingMore: false,
+        allTransactions: [...state.allTransactions, ...page.transactions],
+        hasMore: page.hasMore,
+      );
+    } on AppException catch (error) {
+      state = state.copyWith(
+        isLoadingMore: false,
+        errorMessage: error.error.message,
+      );
+    } catch (error) {
+      state = state.copyWith(
+        isLoadingMore: false,
+        errorMessage: 'No fue posible cargar mas movimientos: $error',
+      );
+    }
   }
 
   void setFromDate(DateTime? date) {

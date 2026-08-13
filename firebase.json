@@ -1,0 +1,34 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "banca-app-d6c65",
+          "appId": "1:463336633528:android:41d0ae568d778d53d2304d",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "banca-app-d6c65",
+          "appId": "1:463336633528:ios:6b1d135d8e284b3ed2304d",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "banca-app-d6c65",
+          "configurations": {
+            "android": "1:463336633528:android:41d0ae568d778d53d2304d",
+            "ios": "1:463336633528:ios:6b1d135d8e284b3ed2304d",
+            "web": "1:463336633528:web:f82b43c211478f05d2304d"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  }
+}

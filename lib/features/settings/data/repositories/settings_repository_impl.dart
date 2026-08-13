@@ -1,15 +1,14 @@
+import '../../../auth/domain/entities/auth_session.dart';
 import '../../domain/entities/settings_entity.dart';
 import '../../domain/entities/user_profile.dart';
 import '../../domain/repositories/settings_repository.dart';
-import '../datasources/remote/settings_remote_datasource.dart';
-import '../models/user_profile_model.dart';
 
 class SettingsRepositoryImpl implements SettingsRepository {
   const SettingsRepositoryImpl({
-    required SettingsRemoteDataSource remoteDataSource,
-  }) : _remoteDataSource = remoteDataSource;
+    required AuthSession? Function() sessionProvider,
+  }) : _sessionProvider = sessionProvider;
 
-  final SettingsRemoteDataSource _remoteDataSource;
+  final AuthSession? Function() _sessionProvider;
 
   @override
   Future<SettingsEntity> getSettings() async {
@@ -18,7 +17,19 @@ class SettingsRepositoryImpl implements SettingsRepository {
 
   @override
   Future<UserProfile> getCurrentUser() async {
-    final profile = await _remoteDataSource.getCurrentUser();
-    return profile.toEntity();
+    final session = _sessionProvider();
+    if (session == null) {
+      throw StateError('No hay una sesion activa.');
+    }
+
+    return UserProfile(
+      id: session.userId,
+      username: session.username,
+      email: session.email,
+      firstName: session.firstName,
+      lastName: session.lastName,
+      gender: session.gender,
+      image: session.image,
+    );
   }
 }

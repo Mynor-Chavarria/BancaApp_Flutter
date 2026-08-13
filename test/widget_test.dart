@@ -30,11 +30,31 @@ class _FakeAuthRepository implements AuthRepository {
     required String password,
   }) async {
     return AuthSession(
+      uid: 'uid-1',
       userId: 1,
       username: username,
-      email: '$username@dummyjson.com',
+      email: username,
       accessToken: 'token',
       refreshToken: 'refresh-token',
+    );
+  }
+
+  @override
+  Future<AuthSession> register({
+    required String fullName,
+    required String email,
+    required String gender,
+    required String password,
+  }) async {
+    return AuthSession(
+      uid: 'uid-1',
+      userId: 1,
+      username: fullName,
+      email: email,
+      accessToken: 'token',
+      refreshToken: 'refresh-token',
+      firstName: fullName,
+      gender: gender,
     );
   }
 
@@ -45,6 +65,7 @@ class _FakeAuthRepository implements AuthRepository {
 void main() {
   test('restores the persisted session on startup', () async {
     const persistedSession = AuthSession(
+      uid: 'uid-1',
       userId: 1,
       username: 'emilys',
       email: 'emily@dummyjson.com',
@@ -85,7 +106,7 @@ void main() {
     expect(find.byType(DashboardView), findsNothing);
     expect(find.byType(FilledButton), findsOneWidget);
 
-    await tester.enterText(find.byType(TextField).at(0), 'emilys');
+    await tester.enterText(find.byType(TextField).at(0), 'emilys@example.com');
     await tester.enterText(find.byType(TextField).at(1), 'emilyspass');
 
     await tester.tap(find.byType(FilledButton));

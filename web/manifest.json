@@ -1,6 +1,6 @@
 {
-    "name": "app1_flutter",
-    "short_name": "app1_flutter",
+    "name": "Banca_App",
+    "short_name": "Banca_App",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

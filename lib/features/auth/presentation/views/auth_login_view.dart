@@ -87,9 +87,11 @@ class _AuthLoginViewState extends ConsumerState<AuthLoginView> {
                   const SizedBox(height: 24),
                   TextField(
                     controller: _usernameController,
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
+                    autofillHints: const [AutofillHints.email],
                     decoration: InputDecoration(
-                      hintText: l10n.username,
+                      hintText: l10n.emailAddress,
                       filled: true,
                       border: const OutlineInputBorder(),
                     ),
@@ -98,6 +100,8 @@ class _AuthLoginViewState extends ConsumerState<AuthLoginView> {
                   TextField(
                     controller: _passwordController,
                     obscureText: state.obscurePassword,
+                    textInputAction: TextInputAction.done,
+                    autofillHints: const [AutofillHints.password],
                     decoration: InputDecoration(
                       hintText: l10n.password,
                       filled: true,
@@ -151,7 +155,7 @@ class _AuthLoginViewState extends ConsumerState<AuthLoginView> {
                       Text('${l10n.notUser} '),
                       TextButton(
                         onPressed: () {
-                          debugPrint('Navigate to Sign Up');
+                          context.goNamed(AppRoutes.registerName);
                         },
                         child: Text(
                           l10n.registerNow,

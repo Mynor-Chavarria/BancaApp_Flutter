@@ -8,6 +8,7 @@ part 'auth_session_model.g.dart';
 @freezed
 abstract class AuthSessionModel with _$AuthSessionModel {
   const factory AuthSessionModel({
+    required String uid,
     required int id,
     required String username,
     required String email,
@@ -16,6 +17,7 @@ abstract class AuthSessionModel with _$AuthSessionModel {
     String? firstName,
     String? lastName,
     String? image,
+    String? gender,
   }) = _AuthSessionModel;
 
   factory AuthSessionModel.fromJson(Map<String, dynamic> json) =>
@@ -26,6 +28,7 @@ extension AuthSessionModelMapper on AuthSessionModel {
   AuthSession toEntity() {
     return AuthSession(
       userId: id,
+      uid: uid,
       username: username,
       email: email,
       accessToken: accessToken,
@@ -33,6 +36,7 @@ extension AuthSessionModelMapper on AuthSessionModel {
       firstName: firstName,
       lastName: lastName,
       image: image,
+      gender: gender,
     );
   }
 }
@@ -41,6 +45,7 @@ extension AuthSessionEntityMapper on AuthSession {
   AuthSessionModel toModel() {
     return AuthSessionModel(
       id: userId,
+      uid: uid,
       username: username,
       email: email,
       accessToken: accessToken,
@@ -48,6 +53,7 @@ extension AuthSessionEntityMapper on AuthSession {
       firstName: firstName,
       lastName: lastName,
       image: image,
+      gender: gender,
     );
   }
 }

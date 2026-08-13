@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../domain/entities/history_entity.dart';
 import '../providers/account_history_notifier_provider.dart';
+import '../state/account_history_state.dart';
 
 class AccountHistoryView extends ConsumerStatefulWidget {
   const AccountHistoryView({
@@ -21,14 +22,27 @@ class AccountHistoryView extends ConsumerStatefulWidget {
 }
 
 class _AccountHistoryViewState extends ConsumerState<AccountHistoryView> {
+  late final ScrollController _scrollController;
+  bool _isRequestingNextPage = false;
+  DateTime _nextAutoLoadAllowedAt = DateTime.fromMillisecondsSinceEpoch(0);
+
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController()..addListener(_onScroll);
     Future.microtask(
       () => ref
           .read(accountHistoryNotifierProvider.notifier)
-          .loadTransactions(widget.accountId),
+          .loadFirstPage(widget.accountId),
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_onScroll)
+      ..dispose();
+    super.dispose();
   }
 
   @override
@@ -69,6 +83,30 @@ class _AccountHistoryViewState extends ConsumerState<AccountHistoryView> {
             const SizedBox(height: 16),
             if (state.isLoading)
               const Expanded(child: Center(child: CircularProgressIndicator()))
+            else if (state.errorMessage != null && state.filtered.isEmpty)
+              Expanded(
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          state.errorMessage!,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        const SizedBox(height: 12),
+                        FilledButton(
+                          onPressed:
+                              () => notifier.loadFirstPage(widget.accountId),
+                          child: Text(l10n.retry),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
             else if (state.filtered.isEmpty)
               Expanded(
                 child: Center(
@@ -81,9 +119,19 @@ class _AccountHistoryViewState extends ConsumerState<AccountHistoryView> {
             else
               Expanded(
                 child: ListView.separated(
-                  itemCount: state.filtered.length,
+                  controller: _scrollController,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount: state.filtered.length + _footerItemCount(state),
                   separatorBuilder: (_, __) => const SizedBox(height: 8),
                   itemBuilder: (context, index) {
+                    if (index >= state.filtered.length) {
+                      return _PaginationFooter(
+                        isLoadingMore: state.isLoadingMore,
+                        errorMessage: state.errorMessage,
+                        onLoadMore: _loadNextPageOnce,
+                      );
+                    }
+
                     final tx = state.filtered[index];
                     return _TransactionTile(transaction: tx);
                   },
@@ -93,6 +141,56 @@ class _AccountHistoryViewState extends ConsumerState<AccountHistoryView> {
         ),
       ),
     );
+  }
+
+  int _footerItemCount(AccountHistoryState state) {
+    return state.isLoadingMore || state.hasMore || state.errorMessage != null
+        ? 1
+        : 0;
+  }
+
+  void _onScroll() {
+    if (!_scrollController.hasClients) {
+      return;
+    }
+
+    final position = _scrollController.position;
+    if (position.pixels >= position.maxScrollExtent - 120) {
+      _loadNextPageOnce(fromScroll: true);
+    }
+  }
+
+  Future<void> _loadNextPageOnce({bool fromScroll = false}) async {
+    if (fromScroll && DateTime.now().isBefore(_nextAutoLoadAllowedAt)) {
+      return;
+    }
+
+    final state = ref.read(accountHistoryNotifierProvider);
+    if (_isRequestingNextPage ||
+        state.isLoading ||
+        state.isLoadingMore ||
+        !state.hasMore) {
+      return;
+    }
+
+    _isRequestingNextPage = true;
+    _nextAutoLoadAllowedAt = DateTime.now().add(
+      const Duration(milliseconds: 900),
+    );
+    await ref
+        .read(accountHistoryNotifierProvider.notifier)
+        .loadNextPage(widget.accountId);
+
+    if (!mounted) {
+      return;
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _isRequestingNextPage = false;
+      _nextAutoLoadAllowedAt = DateTime.now().add(
+        const Duration(milliseconds: 900),
+      );
+    });
   }
 
   Future<DateTime?> _pickDate(
@@ -105,6 +203,47 @@ class _AccountHistoryViewState extends ConsumerState<AccountHistoryView> {
       initialDate: initial,
       firstDate: now.subtract(const Duration(days: 365)),
       lastDate: now,
+    );
+  }
+}
+
+class _PaginationFooter extends StatelessWidget {
+  const _PaginationFooter({
+    required this.isLoadingMore,
+    required this.errorMessage,
+    required this.onLoadMore,
+  });
+
+  final bool isLoadingMore;
+  final String? errorMessage;
+  final VoidCallback onLoadMore;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    if (isLoadingMore) {
+      return const Padding(
+        padding: EdgeInsets.symmetric(vertical: 16),
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      child: Column(
+        children: [
+          if (errorMessage != null) ...[
+            Text(
+              errorMessage!,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 8),
+          ],
+          OutlinedButton(onPressed: onLoadMore, child: Text(l10n.loadMore)),
+        ],
+      ),
     );
   }
 }

@@ -1,13 +1,16 @@
 import 'package:banca_app/l10n/app_localizations.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app/presentation/providers/locale_provider.dart';
 import 'core/environmet/env.dart';
+import 'core/notifications/foreground_notifications_service.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_colors.dart';
 import 'core/widgets/global_loader_overlay.dart';
+import 'firebase_options.dart';
 
 void main() {
   Env.environment = Environment.development;
@@ -17,6 +20,8 @@ void main() {
 void runProject() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Env.initialize();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await ForegroundNotificationsService.initialize();
   runApp(const ProviderScope(child: MyApp()));
 }
 

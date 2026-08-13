@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../app/presentation/views/home_tabs_view.dart';
 import '../../features/auth/presentation/providers/auth_providers.dart';
 import '../../features/auth/presentation/views/auth_login_view.dart';
+import '../../features/auth/presentation/views/auth_register_view.dart';
 import '../../features/history/presentation/views/account_history_view.dart';
 import '../../features/settings/presentation/views/profile_view.dart';
 import 'app_routes.dart';
@@ -15,9 +16,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
     redirect: (context, state) {
       final session = ref.read(authNotifierProvider).session;
       final isOnLogin = state.matchedLocation == AppRoutes.login;
+      final isOnRegister = state.matchedLocation == AppRoutes.register;
+      final isOnAuthRoute = isOnLogin || isOnRegister;
 
-      if (session == null && !isOnLogin) return AppRoutes.login;
-      if (session != null && isOnLogin) {
+      if (session == null && !isOnAuthRoute) return AppRoutes.login;
+      if (session != null && isOnAuthRoute) {
         return AppRoutes.home; // redirect usa path, no name
       }
       return null;
@@ -27,6 +30,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.login,
         name: 'login',
         builder: (context, state) => const AuthLoginView(),
+      ),
+      GoRoute(
+        path: AppRoutes.register,
+        name: AppRoutes.registerName,
+        builder: (context, state) => const AuthRegisterView(),
       ),
       GoRoute(
         path: AppRoutes.home,

@@ -53,6 +53,27 @@ Ejemplo mínimo de `env_dev.json`:
 }
 ```
 
+## Firebase Auth
+
+La app usa `firebase_core` y `firebase_auth` para iniciar sesion con correo y
+contrasena. Antes de ejecutar la app, habilita el proveedor
+`Correo electronico/contrasena` en Firebase Console y genera la configuracion
+del proyecto:
+
+```bash
+fvm dart pub global run flutterfire_cli:flutterfire configure --project=TU_PROJECT_ID --platforms=android,ios,web
+```
+
+Si el comando pide autenticacion, instala Firebase CLI, inicia sesion y vuelve a
+ejecutarlo:
+
+```bash
+firebase login
+```
+
+El comando debe crear `lib/firebase_options.dart` y los archivos nativos de
+Firebase para las plataformas seleccionadas.
+
 ## Estructura del proyecto
 
 ```text
